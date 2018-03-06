@@ -15,10 +15,12 @@ import * as environment from './environment';
 const pbjs = window.pbjs = (window.pbjs || {});
 const GOOGLE_IFRAME_HOSTNAME = '//tpc.googlesyndication.com';
 
+const cacheHost = 'prebid-cache-qa.rubiconproject.com';
+const cachePath = '/cache';
+
 /**
  * DataObject passed to render the ad
  * @typedef {Object} dataObject
- * @property {string} host - Prebid cache host
  * @property {string} uuid - ID to fetch the value from prebid cache
  * @property {string} mediaType - Creative media type, It can be banner, native or video
  * @property {string} pubUrl - Publisher url
@@ -31,7 +33,7 @@ const GOOGLE_IFRAME_HOSTNAME = '//tpc.googlesyndication.com';
  */
 pbjs.renderAd = function(doc, adId, dataObject) {
   if (environment.isAmp(dataObject)) {
-    renderAmpAd(dataObject.cacheHost, dataObject.cachePath, dataObject.uuid);
+    renderAmpAd(dataObject.uuid);
   } else if (environment.isCrossDomain()) {
     renderCrossDomain(adId, dataObject.pubUrl);
   } else {
@@ -118,8 +120,9 @@ function renderCrossDomain(adId, pubUrl) {
   requestAdFromPrebid();
 }
 
-function renderAmpAd(cacheHost = 'prebid-cache-qa.rubiconproject.com', cachePath = '/cache', uuid) {
+function renderAmpAd(uuid) {
   let adUrl = `https://${cacheHost}${cachePath}?uuid=${uuid}`;
+  console.log(`AMP Ad URL: ${adUrl}`);
 
   let handler = function(response) {
     let bidObject;
