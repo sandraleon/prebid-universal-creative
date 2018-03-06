@@ -118,7 +118,7 @@ function renderCrossDomain(adId, pubUrl) {
   requestAdFromPrebid();
 }
 
-function renderAmpAd(cacheHost = 'prebid.adnxs.com', cachePath = '/pbc/v1/cache', uuid) {
+function renderAmpAd(cacheHost = 'prebid-cache-qa.rubiconproject.com', cachePath = '/cache', uuid) {
   let adUrl = `https://${cacheHost}${cachePath}?uuid=${uuid}`;
 
   let handler = function(response) {
