@@ -15,7 +15,7 @@ import * as environment from './environment';
 const pbjs = window.pbjs = (window.pbjs || {});
 const GOOGLE_IFRAME_HOSTNAME = '//tpc.googlesyndication.com';
 
-const cacheHost = 'pbs-qa.aws.rubiconproject.com';
+const cacheHost = 'prebid-server.rubiconproject.com';
 const cachePath = '/cache';
 
 /**
